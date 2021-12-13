@@ -29,7 +29,8 @@ function convertToSql() {
     if (selected.length === 0) {
       vscode.window.showWarningMessage("Data to SQL: no text selected");
     } else {
-      const lines = selected.split(/\r\n/);
+      const lines = selected.split(/\r?\n/);
+
       if (lines.length === 1) {
         vscode.window.showWarningMessage("Data to SQL: only one line of text");
       } else {
@@ -60,34 +61,38 @@ function convertToSql() {
           }
         }
 
-        /*
-		for each row in rows
-			if row[0].length === 0  //blank line skip
+        const newRows = new Array(rows.length);
 
-			if not row[0].startsWith "(" => add (
+        for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+          const row = rows[rowIndex];
+          const length = row.length;
 
-			for each col in row
-				write row[col] + "," + spaces to columnWidths[colIndex]
-			next col
+          if (length === 0 || row[0].length === 0) {
+            newRows[rowIndex] = "\n";
+          } else {
+            if (!row[0].startsWith("(")) {
+              row[0] = "(" + row[0];
+            }
 
-			if not row[maxcol].endsWith ")" => add "),"
-			write line
-		next
-		*/
+            if (!row[length - 1].endsWith("),")) {
+              row[length - 1] = row[length - 1] + "),";
+            }
+
+            newRows[rowIndex] = row.join(", ");
+          }
+        }
+
+        const newLines = newRows.join("\n");
+
+        editor.edit((e) => {
+          e.replace(editor.selection, newLines);
+        });
 
         vscode.window.showInformationMessage(
           "Data to SQL: conversion finished"
         );
       }
     }
-
-    //const firstLine = document.lineAt(0);
-    //const lastLine = document.lineAt(document.lineCount - 1);
-
-    // const allRange = new vscode.Range(
-    //  firstLine.range.start,
-    //  lastLine.range.end
-    //);
   }
 }
 
