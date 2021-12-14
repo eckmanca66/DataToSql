@@ -1,65 +1,47 @@
-# datatosql README
+# DataToSQL README
 
-This is the README for your extension "datatosql". After writing up a brief description, we recommend including the following sections.
+This is a simple extension to convert data copied from something like Excel or a database query results to a column aligned formatted SQL line used in as a row for an Insert statement. Initial version does not do any type checking, so you need to include the quotes where necessary.
 
-## Features
+## Example
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Converts
 
-For example if there is an image subfolder under your extension project workspace:
+```
+'C'	10	abc
+'DE'	1	abcde
+'FGH'	2345	zyx
+```
 
-\!\[feature X\]\(images/feature-x.png\)
+to:
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+```
+('C'  , 10  , abc  ),
+('DE' , 1   , abcde),
+('FGH', 2345, zyx  ),
+```
+
+## Commands
+
+In the _Command Palette_, type **Data** and choose the command:
+
+`Data To SQL: Convert` -> To convert selected lines.
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+This extension has no requirements or dependencies.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+This extension has no extension settings.
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+None at this time.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+See past versions in change log.
 
-### 1.0.0
+## Source
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+[GIT](https://github.com/eckmanca66/DataToSql)

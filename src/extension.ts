@@ -68,8 +68,13 @@ function convertToSql() {
           const length = row.length;
 
           if (length === 0 || row[0].length === 0) {
-            newRows[rowIndex] = "\n";
+            newRows[rowIndex] = row;
           } else {
+            for (let colIndex = 0; colIndex < row.length; colIndex++) {
+              const element = row[colIndex];
+              row[colIndex] = element.padEnd(columns[colIndex], " ");
+            }
+
             if (!row[0].startsWith("(")) {
               row[0] = "(" + row[0];
             }
